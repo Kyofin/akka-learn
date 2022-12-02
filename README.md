@@ -1,0 +1,2 @@
+# akka learn
+com.example.akka.AkkaActorsUnitTest.givenAnAkkaSystem_countTheWordsInAText通过多个actor间互相通讯实现wc计算和打印功能

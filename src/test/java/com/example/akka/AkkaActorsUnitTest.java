@@ -1,12 +1,11 @@
 package com.example.akka;
 
-import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
-import akka.actor.Props;
+import akka.actor.*;
 import akka.testkit.TestKit;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
 
 import java.util.concurrent.CompletableFuture;
@@ -104,6 +103,12 @@ public class AkkaActorsUnitTest {
         ActorRef readingActorRef = actorSystem.actorOf(ReadingActor.props(LINES), "reading-actor");
         readingActorRef.tell(new ReadingActor.ReadLines(), ActorRef.noSender()); //ActorRef.noSender() means the sender ref is akka://test-system/deadLetters
 
+        // 当不再引用Actor时，它们不会自动停止。当我们不再需要一个Actor时，我们必须显式销毁它以防止内存泄漏
+        logActor.tell(PoisonPill.getInstance(), ActorRef.noSender());
+        // 发生kill命令stop actor，与PoisonPill不一样，它会抛出异常ActorKilledException
+        readingActorRef.tell(Kill.getInstance(),ActorRef.noSender());
+        // 不能直接停止系统，它不会等待所有actor执行完
+//        Future<Terminated> terminateResponse = actorSystem.terminate();
 
     }
 

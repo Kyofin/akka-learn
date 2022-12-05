@@ -5,7 +5,6 @@ import akka.testkit.TestKit;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
 
 import java.util.concurrent.CompletableFuture;

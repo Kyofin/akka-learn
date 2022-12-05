@@ -111,6 +111,23 @@ public class AkkaActorsUnitTest {
 
     }
 
+    /**
+     * actor执行是按msg的发送顺序的，上一个没执行完不会执行后面的
+     */
+    @Test
+    public void longTime() throws InterruptedException {
+        ActorSystem actorSystem = ActorSystem.create("my-system");
+        ActorRef longActor = actorSystem.actorOf(Props.create(LongTimeActor.class), "long-actor");
+        longActor.tell(new LongTimeActor.ShortTimeTaskInfo(1,""), null);
+        longActor.tell(new LongTimeActor.LongTimeTaskInfo(2,""), null);
+        longActor.tell(new LongTimeActor.ShortTimeTaskInfo(3,""), null);
+        longActor.tell(new LongTimeActor.ShortTimeTaskInfo(4,""), null);
+        longActor.tell(new LongTimeActor.ShortTimeTaskInfo(5,""), null);
+
+        Thread.sleep(15_000);
+
+    }
+
 
     public static final String LINES = "Lorem Ipsum is simply dummy text\n" +
             "of the printing and typesetting industry.\n" +

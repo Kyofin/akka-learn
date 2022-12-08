@@ -15,6 +15,7 @@
         <module>dag-scheduler</module>
 
         <module>parent-child</module>
+        <module>pool</module>
     </modules>
 
     <properties>

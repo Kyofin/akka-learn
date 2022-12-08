@@ -12,6 +12,9 @@
         <module>simple</module>
         <module>remote-client</module>
         <module>remote-server</module>
+        <module>dag-scheduler</module>
+
+        <module>parent-child</module>
     </modules>
 
     <properties>

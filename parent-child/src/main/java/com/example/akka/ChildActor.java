@@ -8,7 +8,7 @@ public class ChildActor extends AbstractActor {
     private final LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
     /**
-     * 会等待createReceive执行完才执行
+     * 会等待当前msg执行完才执行stop，而后续没处理的msg就不会处理了
      */
     @Override
     public void postStop() {
